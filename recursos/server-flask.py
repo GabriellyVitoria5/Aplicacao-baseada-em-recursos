@@ -82,5 +82,25 @@ def delte_record():
 app.run(debug=True)
 
 # adicionar método PATCH - atualizar parcialmente o registro pelo nome
+@app.route('/', methods=['PATCH'])
+def patch_record():
+    name = request.args.get('name')
+    updates = json.loads(request.data)
+    new_records = [] 
+    
+    with open('data.txt', 'r') as f:
+        data = f.read()
+        records = json.loads(data)
+    
+    for r in records:
+        if r['name'] == name:
+            for key, value in updates.items():
+                r[key] = value  
+        new_records.append(r)  
+    
+    with open('data.txt', 'w') as f:
+        f.write(json.dumps(new_records, indent=2))
+    
+    return jsonify({'name': name, 'updated': updates})
 
 # adicionar método OPTIONS
