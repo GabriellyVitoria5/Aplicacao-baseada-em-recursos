@@ -5,6 +5,6 @@
   },
   {
     "name": "joao",
-    "email": "joao@email.com"
+    "email": "joao@gmail.com"
   }
 ]
