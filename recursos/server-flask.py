@@ -4,7 +4,6 @@
 import json
 from flask import Flask, request, jsonify
 
-# aplicação precisa do parâmetrodo nome para executar
 app = Flask(__name__)
 
 # consultar registros pelo nome
@@ -79,14 +78,12 @@ def delte_record():
     
     return jsonify(record)
 
-app.run(debug=True)
-
-# adicionar método PATCH - atualizar parcialmente o registro pelo nome
+# atualizar parcialmente o registro pelo nome
 @app.route('/', methods=['PATCH'])
-def patch_record():
+def patch_user():
     name = request.args.get('name')
-    updates = json.loads(request.data)
-    new_records = [] 
+    record = json.loads(request.data)
+    new_records = []
     
     with open('data.txt', 'r') as f:
         data = f.read()
@@ -94,13 +91,19 @@ def patch_record():
     
     for r in records:
         if r['name'] == name:
-            for key, value in updates.items():
-                r[key] = value  
-        new_records.append(r)  
-    
+            if "name" in record:
+                r["name"] = record["name"]
+            if "email" in data:
+                r["email"] = record["email"]
+        new_records.append(r)
+
+
     with open('data.txt', 'w') as f:
         f.write(json.dumps(new_records, indent=2))
-    
-    return jsonify({'name': name, 'updated': updates})
+
+    return jsonify(new_records)
 
 # adicionar método OPTIONS
+# .....
+
+app.run(debug=True)
