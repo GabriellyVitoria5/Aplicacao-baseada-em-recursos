@@ -103,7 +103,16 @@ def patch_user():
 
     return jsonify(new_records)
 
-# adicionar método OPTIONS
-# .....
+# mostrar opções de requisição permitidas
+@app.route('/', methods=['OPTIONS'])
+def options_record():
+    response = jsonify({'Métodos permitidos': ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']})
+
+    # define os cabeçalhos para CORS 
+    response.headers['Allow'] = 'GET, POST, PUT, PATCH, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, PATCH, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+
+    return response
 
 app.run(debug=True)
