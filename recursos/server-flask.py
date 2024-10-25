@@ -3,8 +3,11 @@
 
 import json
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
 # consultar registros pelo nome
 @app.route('/', methods=['GET'])
@@ -19,6 +22,14 @@ def query_records():
                 return jsonify(record)
         
         return jsonify({'error': 'data not found'})
+
+# listar todos os registros
+@app.route('/all', methods=['GET'])
+def get_all_records():
+    with open('data.txt', 'r') as f:
+        data = f.read()
+        records = json.loads(data)
+        return jsonify(records)
 
 # criar novos registros
 @app.route('/', methods=['POST'])
