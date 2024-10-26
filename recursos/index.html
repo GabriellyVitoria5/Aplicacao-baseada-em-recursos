@@ -24,13 +24,13 @@
             <input type="email" id="email" required>
         </div>
 
-        <button type="submit">Adicionar Registro</button>
+        <button type="submit" onclick="addRecord()">Adicionar Registro</button>
     </form>
     <hr>
 
     <h2>Tabela de Registros</h2>
     <label for="search">Busque seu registro:</label>
-    <input type="text" id="search-input" onkeyup="filterTable()">
+    <input type="text" id="searchInput" onkeyup="searchRecord()">
     
     <table id="recordsTable">
         <thead>

@@ -23,8 +23,8 @@ fetch('http://127.0.0.1:5000/all')
     });
 
 // filtrar a tabela com base no que o usuário digita
-function filterTable() {
-    const searchedRecord = document.getElementById('search-input').value.toLowerCase();
+function searchRecord() {
+    const searchedRecord = document.getElementById('searchInput').value.toLowerCase();
     const table = document.getElementById('recordsTable');
     const rows = table.getElementsByTagName('tr');
 
@@ -44,4 +44,52 @@ function filterTable() {
             }
         }
     }
+}
+
+// adicionar registro na tabela 
+function addRecord() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+
+    // cria novo registro
+    const newRecord = {
+        name: name,
+        email: email
+    };
+
+    // envia a requisição POST para criar um novo registro
+    fetch('http://127.0.0.1:5000/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newRecord)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao adicionar registro');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // adicionar o novo registro na tabela
+        const recordsTable = document.getElementById("recordsTable");
+    
+        const row = document.createElement('tr');
+        const nameRecord = document.createElement('td');
+        const emailRecord = document.createElement('td');
+
+        nameRecord.textContent = record.name;
+        emailRecord.textContent = record.email;
+
+        row.appendChild(nameCell);
+        row.appendChild(emailCell);
+        recordsTable.appendChild(row);
+
+        // limpar os campos do formulário
+        document.getElementById('record-form').reset();
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+    });
 }
