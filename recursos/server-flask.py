@@ -4,8 +4,10 @@
 import json
 from flask import Flask, request, jsonify
 from flask import make_response
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # consultar registros pelo nome
 @app.route('/', methods=['GET'])
@@ -132,7 +134,7 @@ def partial_update_record():
     with open('data.txt', 'w') as f:
         f.write(json.dumps(new_records, indent=2))
 
-    return jsonify({"updated record": new_records})
+    return jsonify({"updated record": record})
 
 # mostrar opções de requisição permitidas
 @app.route('/', methods=['OPTIONS'])
