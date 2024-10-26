@@ -5,6 +5,29 @@ body {
     margin: 20px;
 }
 
+form {
+    margin-bottom: 25px; 
+}
+
+form .form-input {
+    display: flex; 
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+form label {
+    margin-right: 10px; 
+}
+
+form button {
+    padding: 5px 10px; 
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #c2c2c2; 
+}
+
 table {
     width: 50%;
     border-collapse: collapse;
@@ -25,5 +48,6 @@ table th {
 input {
     margin-bottom: 15px;
     padding: 5px;
-    width: 300px;
+    width: 200px;
 }
+
