@@ -3,11 +3,9 @@
 
 import json
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-
+from flask import make_response
 
 app = Flask(__name__)
-CORS(app)
 
 # consultar registros pelo nome
 @app.route('/', methods=['GET'])
@@ -115,15 +113,10 @@ def patch_user():
     return jsonify(new_records)
 
 # mostrar opções de requisição permitidas
-@app.route('/', methods=['OPTIONS'])
+@app.route('/*', methods=['OPTIONS'])
 def options_record():
-    response = jsonify({'Métodos permitidos': ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']})
-
-    # define os cabeçalhos para CORS 
+    response = make_response()
     response.headers['Allow'] = 'GET, POST, PUT, PATCH, DELETE, OPTIONS'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, PATCH, DELETE, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-
     return response
 
 app.run(debug=True)
