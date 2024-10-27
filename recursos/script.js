@@ -2,7 +2,7 @@
 fetch('http://127.0.0.1:5000/all')
     .then(response => response.json()) // converter resposta do servidor para JSON
     .then(data => {
-        const recordsTable = document.getElementById("recordsTable");
+        const table = document.getElementById("recordsTable");
 
         // adiciona linhas na tabela
         data.forEach(record => {
@@ -15,7 +15,7 @@ fetch('http://127.0.0.1:5000/all')
 
             row.appendChild(nameRecord);
             row.appendChild(emailRecord);
-            recordsTable.appendChild(row);
+            table.appendChild(row);
         });
     })
     .catch(error => {
@@ -51,45 +51,52 @@ function addRecord() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
 
-    // cria novo registro
-    const newRecord = {
-        name: name,
-        email: email
-    };
+    if(name.length != 0 || email.length != 0){
+        // cria novo registro
+        const newRecord = {
+            name: name,
+            email: email
+        };
 
-    // envia a requisição POST para criar um novo registro
-    fetch('http://127.0.0.1:5000/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newRecord)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro ao adicionar registro');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // adicionar o novo registro na tabela
-        const recordsTable = document.getElementById("recordsTable");
+        // envia a requisição POST para criar um novo registro
+        fetch('http://127.0.0.1:5000/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UFT-8'
+            },
+            body: JSON.stringify(newRecord)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('error to add new record');
+            }
+            return response.json();
+        })
+        .then(record => {
+            // adicionar o novo registro na tabela
+            const table = document.getElementById("recordsTable");
+        
+            const row = document.createElement('tr');
+            const nameRecord = document.createElement('td');
+            const emailRecord = document.createElement('td');
+
+            nameRecord.textContent = record.name;
+            emailRecord.textContent = record.email;
+
+            row.appendChild(nameCell);
+            row.appendChild(emailCell);
+            table.appendChild(row);
+
+            // limpar os campos do formulário
+            document.getElementById('record-form').reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    else{
+        console.error("Um ou mais campos em branco");
+    }
+
     
-        const row = document.createElement('tr');
-        const nameRecord = document.createElement('td');
-        const emailRecord = document.createElement('td');
-
-        nameRecord.textContent = record.name;
-        emailRecord.textContent = record.email;
-
-        row.appendChild(nameCell);
-        row.appendChild(emailCell);
-        recordsTable.appendChild(row);
-
-        // limpar os campos do formulário
-        document.getElementById('record-form').reset();
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-    });
 }

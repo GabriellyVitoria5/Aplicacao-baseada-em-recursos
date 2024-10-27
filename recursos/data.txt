@@ -10,5 +10,13 @@
   {
     "name": "maria",
     "email": "maria@gmail.com"
+  },
+  {
+    "name": "ana",
+    "email": "ana@gmail.com"
+  },
+  {
+    "name": "bia",
+    "email": "bia@gmail.com"
   }
 ]
