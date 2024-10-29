@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
@@ -19,7 +19,6 @@ body {
 
 .container > div {
     flex: 1; /* cada div ocupará a mesma proporção de espaço */
-    margin-right: 10px;
 }
 
 h1, h2 {
@@ -27,21 +26,25 @@ h1, h2 {
     color: #333;
 }
 
-
 form .form-input {
     margin-bottom: 10px;
     text-align: center;
 }
 
-form label {
+form .form-input label {
     margin-right: 10px; 
 }
 
 form button {
     padding: 5px 10px; 
     font-size: 16px;
-    margin: 0 auto; /* Adiciona margem automática para centralizar o botão */
-    display: block; /* Faz o botão se comportar como um bloco, permitindo centralização */
+    margin: 10px 5px;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    margin-right: 10px; 
+    cursor: pointer; 
 }
 
 table {
@@ -64,7 +67,6 @@ table th {
 input {
     margin-bottom: 15px;
     padding: 5px;
-    width: 200px;
 }
 
 hr{

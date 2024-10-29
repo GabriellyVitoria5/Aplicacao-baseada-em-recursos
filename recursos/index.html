@@ -13,7 +13,7 @@
     <div class="container">
 
         <div>
-            <h2>Adicionar Registros</h2>
+            <h2>Adicionar e Editar Registros</h2>
             <form id="record-form">
                 
                 <div class="form-input">
@@ -26,7 +26,18 @@
                     <input type="email" id="email" required>
                 </div>
 
-                <button type="submit" onclick="addRecord()">Adicionar Registro</button>
+                <div class="form-input">
+                    <button type="submit" onclick="addRecord()">Adicionar</button>
+                    <button type="submit" onclick="editRecord()">Editar</button>
+                </div>
+                
+                <p>Escolha qual método http a ser usado para editar o registro:</p>
+                <input type="radio" id="put" name="edit" value="put" checked />
+                <label for="huey">PUT</label>
+
+                <input type="radio" id="patch" name="edit" value="patch" />
+                <label for="huey">PATCH</label>
+
             </form>
         </div>
         <hr>
