@@ -134,3 +134,41 @@ function deleteRecord(name, row) {
         console.error('Error:', error);
     });
 }
+
+function updateRecord() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    
+    // verifica qual método foi selecionado
+    const method = document.querySelector('input[name="method"]:checked').value;
+    
+
+    const updatedRecord = {
+        name: name,
+        email: email
+    };
+
+    // URL base para a requisição (sem o parâmetro de nome no caso de PUT)
+    const url = method === 'PATCH' ? `http://127.0.0.1:5000/?name=${name}` : 'http://127.0.0.1:5000/';
+
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedRecord)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error updating record with ${method}`);
+        }
+        return response.json();
+    })
+    .then(() => {
+        // limpar o formulário após a edição
+        document.getElementById('record-form').reset();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
