@@ -9,40 +9,46 @@
 
 <body>
     <h1>Gerenciar Registros</h1>
-    <hr>
 
-    <h2>Adicionar e Atualizar Registros</h2>
-    <form id="record-form">
-        
-        <div class="form-input">
-            <label for="name">Nome: </label>
-            <input type="text" id="name" required>
+    <div class="container">
+
+        <div>
+            <h2>Adicionar Registros</h2>
+            <form id="record-form">
+                
+                <div class="form-input">
+                    <label for="name">Nome: </label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-input">
+                    <label for="email">Email: </label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <button type="submit" onclick="addRecord()">Adicionar Registro</button>
+            </form>
         </div>
-        
-        <div class="form-input">
-            <label for="email">Email: </label>
-            <input type="email" id="email" required>
+        <hr>
+        <div>
+            <h2>Tabela de Registros</h2>
+            <label for="search">Busque seu registro:</label>
+            <input type="text" id="searchInput" onkeyup="searchRecord()">
+            
+            <table id="recordsTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- registros estarão aqui -->
+                </tbody>
+            </table>
         </div>
 
-        <button type="submit" onclick="addRecord()">Adicionar Registro</button>
-    </form>
-    <hr>
-
-    <h2>Tabela de Registros</h2>
-    <label for="search">Busque seu registro:</label>
-    <input type="text" id="searchInput" onkeyup="searchRecord()">
-    
-    <table id="recordsTable">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- registros estarão aqui -->
-        </tbody>
-    </table>
+    </div>
 
     <script src="script.js"></script>
 </body>
