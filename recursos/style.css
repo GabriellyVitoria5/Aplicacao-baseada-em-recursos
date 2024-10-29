@@ -44,10 +44,6 @@ form button {
     display: block; /* Faz o botão se comportar como um bloco, permitindo centralização */
 }
 
-form button:hover {
-    background-color: #c2c2c2; 
-}
-
 table {
     width: 100%; 
     border-collapse: collapse;
