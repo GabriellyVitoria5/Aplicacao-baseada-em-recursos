@@ -138,21 +138,17 @@ function deleteRecord(name, row) {
 function updateRecord() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
-    
-    // verifica qual método foi selecionado
+
     const method = document.querySelector('input[name="method"]:checked').value;
-    
 
-    const updatedRecord = {
-        name: name,
-        email: email
-    };
+    const updatedRecord = {};
+    if (name) updatedRecord.name = name;
+    if (email) updatedRecord.email = email;
 
-    // URL base para a requisição (sem o parâmetro de nome no caso de PUT)
-    const url = method === 'PATCH' ? `http://127.0.0.1:5000/?name=${name}` : 'http://127.0.0.1:5000/';
+    const url = method === 'patch' ? `http://127.0.0.1:5000/?name=${name}` : 'http://127.0.0.1:5000/';
 
     fetch(url, {
-        method: method,
+        method: method.toUpperCase(),
         headers: {
             'Content-Type': 'application/json'
         },
